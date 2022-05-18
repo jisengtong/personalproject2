@@ -1,0 +1,213 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Tip Calculator </title>
+    <link rel="stylesheet" href="tailwind.css">
+    <script src="https://kit.fontawesome.com/99fbfcc1b4.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Space Mono', sans-serif;
+        }
+
+        .wrapper {
+            background: hsl(185, 41%, 84%);
+        }
+
+        .dc {
+            background: hsl(183, 100%, 15%);
+        }
+
+        .gray {
+            background: hsl(180, 24%, 89%);
+        }
+
+        .dct {
+            color: hsl(183, 100%, 15%);
+        }
+
+        .btns:hover {
+            background: hsl(172, 67%, 45%);
+            color: hsl(183, 100%, 15%);
+        }
+
+        .lcy {
+            color: hsl(172, 67%, 45%);
+        }
+
+        .bs {
+            background: hsl(172, 67%, 45%);
+        }
+
+        .btns:focus {
+            background: hsl(172, 67%, 45%);
+        }
+
+        #reset:hover {
+            background: hsl(185, 41%, 84%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper min-h-screen flex flex-col items-center justify-center">
+        <h1 class="icon mt-10 md:mt-0"><img src="./image/logo13.svg" alt=""></h1>
+        <div
+            class="mt-20 max-w-screen-lg w-full md:mx-auto card px-6 py-8 bg-white shadow-xl rounded-xl flex flex-col md:flex-row">
+            <div class="left w-full md:w-1/2 md:px-6 md:pr-8">
+                <form action="#" class="box-border" id="form">
+                    <section class="bill relative">
+                        <div class="flex justify-between  flex-col xs:flex-row">
+                            <label for="amount" class="title text-gray-500 font-bold ">Bill</label>
+                            <label for="error" class="err-msg title text-red-500 font-bold "></label>
+                        </div>
+                        <input type="number" step="0.01" data-index="0"
+                            class="num-field text-right py-3 px-3 mt-2 block w-full gray font-bold dct focus:ring focus:ring-green-600 outline-none rounded-md"
+                            name="amount" id="bill" placeholder="0" class="">
+                        <label for="amount"><img src="./image/icon-dollar.svg"
+                                class="transform -translate-y-8 translate-x-4" alt=""></label>
+                    </section>
+
+                    <div class="flex justify-between mt-8 flex-col xs:flex-row">
+                        <label for="tip" class="inline-block title text-gray-500 font-bold"> Number of
+                            People</label>
+                        <label for="error" class="err-msg title text-red-500 font-bold "></label>
+                    </div>
+
+                    <section class="headcount">
+                        <input type="number" data-index="1"
+                            class="num-field text-right py-3 px-3 mt-2 block w-full gray font-bold dct focus:ring focus:ring-green-600 outline-none rounded-md"
+                            name="amount" id="person-count" placeholder="0" class="">
+                        <label for="amount"><img src="./image/icon-person.svg"
+                                class="transform -translate-y-8 translate-x-4" alt=""></label>
+                    </section>
+
+                    <label for="tip" class="inline-block mt-6 title text-gray-500 font-bold "> Select Tip %</label>
+                    <section class="mt-4 tip grid grid-cols-2 xs:grid-cols-3 gap-3">
+                        <button type="button"
+                            class="transition duration-300 btns block col text-white dc font-bold text-2xl py-3 px-8 rounded-md"
+                            data-tip="0.05">
+                            5%
+                        </button>
+                        <button type="button"
+                            class="transition duration-300 btns block col text-white dc font-bold text-2xl py-3 px-8 rounded-md"
+                            data-tip="0.1">
+                            10%
+                        </button>
+                        <button type="button"
+                            class="transition duration-300 btns block col text-white dc font-bold text-2xl py-3 px-8 rounded-md"
+                            data-tip="0.15">
+                            15%
+                        </button>
+                        <button type="button"
+                            class="transition duration-300 btns block col text-white dc font-bold text-2xl py-3 px-8 rounded-md"
+                            data-tip="0.2">
+                            20%
+                        </button>
+                        <button type="button"
+                            class="transition duration-300 btns block col text-white dc font-bold text-2xl py-3 px-8 rounded-md"
+                            data-tip="0.25">
+                            25%
+                        </button>
+                        <input type="number" name="" id="custom" placeholder="Custom"
+                            class=" outline-none focus:ring focus:ring-green-600 rounded-md block col text-dct gray text-center text-xl font-bold">
+                    </section>
+
+                </form>
+            </div>
+            <div class="mt-6 md:mt-0 right w-full md:w-1/2 pt-12 px-6 xs:px-10 dc rounded-xl ">
+                <div class="amounts flex justify-between items-center">
+                    <div class="label">
+                        <h2 class="text-white text-xl">Tip Amount</h2>
+                        <p class="text-gray-400">/person</p>
+                    </div>
+                    <div id="total-amount" class="text-4xl xs:text-5xl lcy font-bold">$0.00</div>
+                </div>
+
+                <div class="persons mt-6 md:mt-12 flex justify-between items-center">
+                    <div class="label">
+                        <h2 class="text-white text-xl">Total</h2>
+                        <p class="text-gray-400">/person</p>
+                    </div>
+                    <div id="total-person" class="text-4xl xs:text-5xl lcy font-bold">$0.00</div>
+                </div>
+
+                <button id="reset" type="button"
+                    class=" my-10 md:my-0 md:mt-32 outline-none focus:ring focus:ring-green-700 transition duration-500 rounded-md text-2xl xs:text-3xl font-bold py-2 text-center w-full px-4 bs">RESET</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const get_id = (id) => document.getElementById(id);
+
+        const amount = get_id('total-amount'),
+            person = get_id('total-person');
+
+        const btns = document.querySelectorAll('.btns'),
+            bill = get_id('bill'),
+            customRate = get_id('custom'),
+            personCount = get_id('person-count')
+
+        const errMsg = document.querySelectorAll('.err-msg')
+
+        document.getElementById('form').addEventListener('keyup', () => {
+            if (Number(customRate.value) > 0 && (Number(bill.value) != "" && Number(personCount.value) != 0)) {
+                if (Number(customRate.value <= 100)) {
+                    calculate(Number(bill.value), Number(customRate.value / 100), Number(personCount.value))
+                }
+            }
+        })
+
+        btns.forEach(x => x.addEventListener('click', () => {
+            let tip = Number(x.dataset.tip)
+
+            document.querySelectorAll('.num-field').forEach(x => {
+                x.classList.remove('ring', 'ring-red-400', 'ring-green-400')
+                if (Number(x.value) === 0 || Number(x.value) === "") {
+                    x.classList.add('ring', 'ring-red-400')
+                    errMsg[x.dataset.index].innerText = "Number Cannot be 0!"
+                } else {
+                    x.classList.add('ring', 'ring-green-400')
+                    errMsg[x.dataset.index].innerText = ""
+                    calculate(Number(bill.value), tip, Number(personCount.value))
+                }
+            })
+        }))
+
+        function calculate(value, percentage, headcounts) {
+            let tip;
+            let ttotal;
+            if (value === 0 || value === NaN || (headcounts === 0 || headcounts === NaN)) {
+                tip = 0;
+                total = 0;
+            } else {
+                tip = (value * percentage) / headcounts;
+                ttotal = (value / headcounts) + tip;
+            }
+
+            amount.innerText = `$${tip.toFixed(2)}`
+            person.innerText = `$${ttotal.toFixed(2)}`
+        }
+
+        document.getElementById('reset').addEventListener('click', () => {
+            amount.innerText = "$0.00"
+            person.innerText = "$0.00"
+            document.querySelectorAll('.num-field').forEach(x => {
+                x.classList.remove('ring', 'ring-red-400', 'ring-green-400')
+            })
+            errMsg.forEach(x => x.innerText = "")
+            customRate.value = ""
+            bill.value = ""
+            personCount.value = ""
+        })
+    </script>
+</body>
+
+</html>
